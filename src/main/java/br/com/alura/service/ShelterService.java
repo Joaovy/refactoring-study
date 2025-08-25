@@ -1,5 +1,6 @@
 package br.com.alura.service;
 
+import br.com.alura.client.ClientHttpConfiguration;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -15,11 +16,17 @@ import java.util.Scanner;
 
 public class ShelterService {
 
+    private ClientHttpConfiguration client;
+
+    public ShelterService(ClientHttpConfiguration client){
+        this.client = client;
+    }
+
+
     public void listShelter() throws IOException, InterruptedException {
 
-        HttpClient client = HttpClient.newHttpClient();
         String uri = "http://localhost:8080/abrigos";
-        HttpResponse<String> response = requestGet(client, uri);
+        HttpResponse<String> response = client.requestGet(uri);
 
         String responseBody = response.body();
         JsonArray jsonArray = JsonParser.parseString(responseBody).getAsJsonArray();
@@ -47,10 +54,9 @@ public class ShelterService {
         json.addProperty("telefone", telefone);
         json.addProperty("email", email);
 
-        HttpClient client = HttpClient.newHttpClient();
         String uri = "http://localhost:8080/abrigos";
 
-        HttpResponse<String> response = requestPost(client, uri, json);
+        HttpResponse<String> response = client.requestPost(uri, json);
 
         int statusCode = response.statusCode();
         String responseBody = response.body();
@@ -63,30 +69,6 @@ public class ShelterService {
         }
 
     }
-
-    private HttpResponse<String> requestGet (HttpClient client, String uri) throws IOException, InterruptedException {
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
-
-    }
-
-    private HttpResponse<String> requestPost (HttpClient client, String uri, JsonObject json) throws IOException, InterruptedException {
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri))
-                .header("Content-Type", "application/json")
-                .method("POST", HttpRequest.BodyPublishers.ofString(json.toString()))
-                .build();
-
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
-
-    }
-
 
 
 }

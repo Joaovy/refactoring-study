@@ -1,5 +1,6 @@
 package br.com.alura;
 
+import br.com.alura.client.ClientHttpConfiguration;
 import br.com.alura.service.PetService;
 import br.com.alura.service.ShelterService;
 import java.util.Scanner;
@@ -8,8 +9,9 @@ public class AdopetConsoleApplication {
 
     public static void main(String[] args) {
 
-        ShelterService shelterService = new ShelterService();
-        PetService petService = new PetService();
+        ClientHttpConfiguration client = new ClientHttpConfiguration();
+        ShelterService shelterService = new ShelterService(client);
+        PetService petService = new PetService(client);
 
         System.out.println("##### BOAS VINDAS AO SISTEMA ADOPET CONSOLE #####");
         try {
