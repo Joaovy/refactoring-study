@@ -1,11 +1,13 @@
 package br.com.alura.service;
 
 import br.com.alura.client.ClientHttpConfiguration;
+import br.com.alura.domain.Pet;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +25,6 @@ public class PetService {
     public PetService(ClientHttpConfiguration client){
         this.client = client;
     }
-
 
     public void listPetsShelter() throws IOException, InterruptedException {
 
@@ -76,17 +77,10 @@ public class PetService {
             String cor = campos[4];
             Float peso = Float.parseFloat(campos[5]);
 
-            JsonObject json = new JsonObject();
-            json.addProperty("tipo", tipo.toUpperCase());
-            json.addProperty("nome", nome);
-            json.addProperty("raca", raca);
-            json.addProperty("idade", idade);
-            json.addProperty("cor", cor);
-            json.addProperty("peso", peso);
+            Pet pet = new Pet(tipo, nome, raca, idade, cor, peso);
 
             String uri = "http://localhost:8080/abrigos/" + idOuNome + "/pets";
-
-            HttpResponse<String> response = client.requestPost(uri, json);
+            HttpResponse<String> response = client.requestPost(uri, pet);
 
             int statusCode = response.statusCode();
             String responseBody = response.body();
@@ -104,7 +98,5 @@ public class PetService {
         reader.close();
 
     }
-
-
 
 }
