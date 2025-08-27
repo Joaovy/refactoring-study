@@ -8,6 +8,7 @@ public class Pet {
     private int age;
     private String color;
     private Float weight;
+    private Long id;
 
     public Pet(String type, String name, String breed, int age, String color, Float weight) {
         this.type = type;
@@ -18,4 +19,31 @@ public class Pet {
         this.weight = weight;
     }
 
+    public Long getId(){
+        return id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Float getWeight() {
+        return weight;
+    }
 }
