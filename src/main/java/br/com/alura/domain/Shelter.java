@@ -1,16 +1,26 @@
 package br.com.alura.domain;
 
-public class Shelter {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private String name;
-    private String phone;
+public class Abrigo {
+
+    //@JsonProperty("nome")
+    private String nome;
+
+    //@JsonProperty("telefone")
+    private String telefone;
+
     private String email;
     private Long id;
+    private Pet[] pets;
 
+    public Abrigo(){
 
-    public Shelter(String name, String phone, String email) {
-        this.name = name;
-        this.phone = phone;
+    }
+
+    public Abrigo(String nome, String telefone, String email) {
+        this.nome = nome;
+        this.telefone = telefone;
         this.email = email;
     }
 
@@ -19,6 +29,18 @@ public class Shelter {
     }
 
     public String getNome() {
-        return name;
+        return nome;
+    }
+
+    public Pet[] getPets() {
+        return pets;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
     }
 }
