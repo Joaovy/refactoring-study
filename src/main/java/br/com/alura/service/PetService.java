@@ -2,20 +2,11 @@ package br.com.alura.service;
 
 import br.com.alura.client.ClientHttpConfiguration;
 import br.com.alura.domain.Pet;
-import br.com.alura.domain.Shelter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
@@ -51,10 +42,10 @@ public class PetService {
         for (Pet pet : petsList) {
 
             long id = pet.getId();
-            String tipo = pet.getType();
-            String nome = pet.getName();
-            String raca = pet.getBreed();
-            int idade = pet.getAge();
+            String tipo = pet.getTipo();
+            String nome = pet.getNome();
+            String raca = pet.getRaca();
+            int idade = pet.getIdade();
 
             System.out.println(id +" - " +tipo +" - " +nome +" - " +raca +" - " +idade +" ano(s)");
         }
@@ -77,7 +68,7 @@ public class PetService {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] campos = line.split(",");
-            String tipo = campos[0];
+            String tipo = campos[0].toUpperCase();
             String nome = campos[1];
             String raca = campos[2];
             int idade = Integer.parseInt(campos[3]);

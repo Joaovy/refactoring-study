@@ -1,8 +1,6 @@
 package br.com.alura.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class Abrigo {
+public class Shelter {
 
     //@JsonProperty("nome")
     private String nome;
@@ -14,11 +12,11 @@ public class Abrigo {
     private Long id;
     private Pet[] pets;
 
-    public Abrigo(){
+    public Shelter(){
 
     }
 
-    public Abrigo(String nome, String telefone, String email) {
+    public Shelter(String nome, String telefone, String email) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
