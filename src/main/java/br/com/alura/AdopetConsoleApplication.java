@@ -9,6 +9,8 @@ public class AdopetConsoleApplication {
 
     public static void main(String[] args) {
 
+        CommandExecutor execultor = new CommandExecutor();
+
         ClientHttpConfiguration client = new ClientHttpConfiguration();
         ShelterService shelterService = new ShelterService(client);
         PetService petService = new PetService(client);
@@ -28,16 +30,16 @@ public class AdopetConsoleApplication {
                 opcaoEscolhida = Integer.parseInt(textoDigitado);
 
                 if (opcaoEscolhida == 1) {
-                    shelterService.listShelter();
+                    execultor.executeCommand(new ListShelterCommand());
 
                 } else if (opcaoEscolhida == 2) {
-                    shelterService.registerShelter();
+                    execultor.executeCommand(new RegisterShelterCommand());
 
                 } else if (opcaoEscolhida == 3) {
-                    petService.listPetsShelter();
+                    execultor.executeCommand(new ListPetsCommand());
 
                 } else if (opcaoEscolhida == 4) {
-                    petService.importPetsShelter();
+                    execultor.executeCommand(new RegisterShelterCommand());
 
                 } else if (opcaoEscolhida == 5) {
                     break;
