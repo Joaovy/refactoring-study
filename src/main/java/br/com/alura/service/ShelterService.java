@@ -37,6 +37,16 @@ public class ShelterService {
 
     }
 
+    private void showShelters(List<Shelter> abrigos){
+        System.out.println("Abrigos cadastrados:");
+        for (Shelter shelter : abrigos) {
+            long id = shelter.getId();
+            String nome = shelter.getNome();
+            System.out.println(id +" - " +nome);
+        }
+
+    }
+
     public void registerShelter() throws IOException, InterruptedException {
 
         System.out.println("Digite o nome do abrigo:");
@@ -65,15 +75,7 @@ public class ShelterService {
 
     }
 
-    private void showShelters(List<Shelter> abrigos){
-        System.out.println("Abrigos cadastrados:");
-        for (Shelter shelter : abrigos) {
-            long id = shelter.getId();
-            String nome = shelter.getNome();
-            System.out.println(id +" - " +nome);
-        }
 
-    }
 
 
 

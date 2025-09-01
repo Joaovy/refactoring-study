@@ -1,8 +1,4 @@
 package br.com.alura;
-
-import br.com.alura.client.ClientHttpConfiguration;
-import br.com.alura.service.PetService;
-import br.com.alura.service.ShelterService;
 import java.util.Scanner;
 
 public class AdopetConsoleApplication {
@@ -11,47 +7,40 @@ public class AdopetConsoleApplication {
 
         CommandExecutor execultor = new CommandExecutor();
 
-        ClientHttpConfiguration client = new ClientHttpConfiguration();
-        ShelterService shelterService = new ShelterService(client);
-        PetService petService = new PetService(client);
-
         System.out.println("##### BOAS VINDAS AO SISTEMA ADOPET CONSOLE #####");
         try {
             int opcaoEscolhida = 0;
             while (opcaoEscolhida != 5) {
-                System.out.println("\nDIGITE O NÚMERO DA OPERAÇÃO DESEJADA:");
-                System.out.println("1 -> Listar abrigos cadastrados");
-                System.out.println("2 -> Cadastrar novo abrigo");
-                System.out.println("3 -> Listar pets do abrigo");
-                System.out.println("4 -> Importar pets do abrigo");
-                System.out.println("5 -> Sair");
+
+                exibirMenu();
 
                 String textoDigitado = new Scanner(System.in).nextLine();
                 opcaoEscolhida = Integer.parseInt(textoDigitado);
 
-                if (opcaoEscolhida == 1) {
-                    execultor.executeCommand(new ListShelterCommand());
+                switch (opcaoEscolhida){
+                    case 1 -> execultor.executeCommand(new ListShelterCommand());
+                    case 2 -> execultor.executeCommand(new RegisterShelterCommand());
+                    case 3 -> execultor.executeCommand(new ListPetsCommand());
+                    case 4 -> execultor.executeCommand(new ImportPetsCommand());
+                    case 5 -> System.exit(0);
 
-                } else if (opcaoEscolhida == 2) {
-                    execultor.executeCommand(new RegisterShelterCommand());
-
-                } else if (opcaoEscolhida == 3) {
-                    execultor.executeCommand(new ListPetsCommand());
-
-                } else if (opcaoEscolhida == 4) {
-                    execultor.executeCommand(new RegisterShelterCommand());
-
-                } else if (opcaoEscolhida == 5) {
-                    break;
-                } else {
-                    System.out.println("NÚMERO INVÁLIDO!");
-                    opcaoEscolhida = 0;
+                    default -> opcaoEscolhida = 0;
                 }
+
             }
             System.out.println("Finalizando o programa...");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void exibirMenu(){
+        System.out.println("\nDIGITE O NÚMERO DA OPERAÇÃO DESEJADA:");
+        System.out.println("1 -> Listar abrigos cadastrados");
+        System.out.println("2 -> Cadastrar novo abrigo");
+        System.out.println("3 -> Listar pets do abrigo");
+        System.out.println("4 -> Importar pets do abrigo");
+        System.out.println("5 -> Sair");
     }
 
 }
