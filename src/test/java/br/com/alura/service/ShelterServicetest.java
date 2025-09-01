@@ -34,6 +34,7 @@ public class ShelterServicetest {
         when(response.body()).thenReturn("[{"+shelter.toString()+"}]");
         when(client.requestGet(anyString())).thenReturn(response);
 
+        shelterService.listShelter();
 
         String[] lines = baos.toString().split(System.lineSeparator());
         String actualAbrigosCadastrados = lines[0];
